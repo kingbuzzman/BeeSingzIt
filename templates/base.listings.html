@@ -1,0 +1,23 @@
+{% if search|default:"" != "" %}
+    <div id="search_results">Results: {{ results.total }}</div>
+    <ul>
+    {% for track in results.tracks %}
+        <li>
+            {% if track.status == 1 %}
+                <a href="{{ track.songURL }}" class="title" target="_blank">{{ track.title|safe }}</a>
+            {% else %}
+                <span class="title">{{ track.title|safe }}</span>
+            {% endif %} by <span class="artist">{{ track.artist|safe }}</span>
+        </li>
+    {% empty %}
+        <li>Sorry no results</li>
+    {% endfor %}
+    </ul>
+    <div id="search_paging">
+        {% if page != 1 %}<a rel="{{ pageprev }}" href="{% url main_search %}?search={{ search|safe }}&page={{ pageprev }}" class="nav">&laquo; Prev</a>{% endif %}
+        {% for pag in paging %}
+            <a rel="{{ pag }}" href="{% url main_search %}?search={{ search|safe }}&page={{ pag }}"{% if page == pag %} class="current"{% endif %}>{{ pag }}</a>
+        {% endfor %}
+        {% if page < pagelast and pagelast > 0 %}<a rel="{{ pagenext }}" href="{% url main_search %}?search={{ search|safe }}&page={{ pagenext }}" class="nav">Next &raquo;</a>{% endif %}
+    </div>
+{% endif %}

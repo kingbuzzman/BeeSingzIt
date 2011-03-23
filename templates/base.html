@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>BeeSingzIt{{ title }}</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/jQuery.jPlayer.1.2.0/jquery.jplayer.min.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
+    </head>
+    <body>
+        <div id="main_container">
+            <div class="top_illustration">
+                <img src="/images/been.png" alt="" title="" height="143" width="156">
+            </div>
+            <div id="header">
+                <div class="logo">
+                    <a href="/">BeeSingzIt</a>
+                </div>
+            </div>
+            <div id="menu_tab">
+                <div id="seach_container">
+                    <form id="search_form" method="get" action="{% url main_search %}">
+                        {% csrf_token %}
+                        <label for="search">Search</label>
+                        <input type="text" id="search" name="search" value="{{ search|safe }}" autocomplete="off" />
+                        <input type="hidden" id="page" name="page" value="1" />
+                        <input type="submit" id="btn_submit" value="Search" class="button" />
+                    </form>
+                    <hr>
+                </div>
+            </div>
+            <div id="main_content">
+                <div id="content">
+                    {% block content %}Nothing was found{% endblock %}
+                </div>
+                <div id="player">&nbsp;</div>
+                <div id="footer">
+                    <img src="/images/footer_logo.gif" alt="" title=""> BeeSingzIt &copy;{% now "Y" %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
